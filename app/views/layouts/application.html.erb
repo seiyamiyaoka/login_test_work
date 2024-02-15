@@ -11,25 +11,25 @@
     <% if logged_in? %>
       <ul>
         <li>
-          <%= link_to "タスク一覧", tasks_path, method: :get, class: "tasks-index" %>
+          <%= link_to "タスク一覧", tasks_path, method: :get, id: "tasks-index" %>
         </li>
         <li>
-          <%= link_to "タスクを登録する", tasks_path, method: :post, class: "new-task" %>
+          <%= link_to "タスクを登録する", new_task_path, method: :get, id: "new-task" %>
         </li>
         <li>
-          <%= link_to "アカウント", user_path(current_user.id), method: :get, class: "my-account" %>
+          <%= link_to "アカウント", user_path(current_user.id), method: :get, id: "my-account" %>
         </li>
         <li>
-          <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: "sign-out" %>
+          <%= link_to "ログアウト", session_path(current_user.id), method: :delete, id: "sign-out" %>
         </li>
       </ul>
     <% else %>
       <ul>
         <li>
-          <%= link_to "アカウント登録", new_user_path, method: :get, class: "sign-up" %>
+          <%= link_to "アカウント登録", new_user_path, method: :get, id: "sign-up" %>
         </li>
         <li>
-          <%= link_to "ログイン", new_session_path, method: :get, class: "sign-in" %>
+          <%= link_to "ログイン", new_session_path, method: :get, id: "sign-in" %>
         </li>
       </ul>
     <% end %>
