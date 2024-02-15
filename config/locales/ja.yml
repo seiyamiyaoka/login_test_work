@@ -2,18 +2,33 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザ
+      session: セッション
     attributes:
       task:
         title: タイトル
         content: 内容
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
   errors:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
+      invalid: は適切ではありません
+      too_short: は6文字以上で入力してください
+      taken: はすでに使用されています
+      confirmation: とパスワードの入力が一致しません
   helpers:
     submit:
       create: 登録する
       update: 更新する
+    label:
+      session:
+        email: メールアドレス
+        password: パスワード
   common:
     new: 新規作成
     show: 詳細
@@ -36,3 +51,25 @@ ja:
       updated: タスクを更新しました
     destroy:
       destroyed: タスクを削除しました
+  users:
+    new:
+      title: アカウント登録ページ
+    edit:
+      title: アカウント編集ページ
+    show:
+      title: アカウント詳細ページ
+      name: 名前
+      email: メールアドレス
+    create:
+      created: アカウントを登録しました
+    update:
+      updated: アカウントを更新しました
+  sessions:
+    new:
+      title: ログインページ
+    create:
+      created: ログインしました
+    destroy:
+      destroyed: ログアウトしました
+  notice:
+    login_required: ログインしてください

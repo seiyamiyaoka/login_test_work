@@ -4,13 +4,39 @@
     <title>CdpWebRailsSessionLoginTask</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <p id="notice"><%= notice %></p>
+    <% if logged_in? %>
+      <ul>
+        <li>
+          <%= link_to "タスク一覧", tasks_path, method: :get, class: "tasks-index" %>
+        </li>
+        <li>
+          <%= link_to "タスクを登録する", tasks_path, method: :post, class: "new-task" %>
+        </li>
+        <li>
+          <%= link_to "アカウント", user_path(current_user.id), method: :get, class: "my-account" %>
+        </li>
+        <li>
+          <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class: "sign-out" %>
+        </li>
+      </ul>
+    <% else %>
+      <ul>
+        <li>
+          <%= link_to "アカウント登録", new_user_path, method: :get, class: "sign-up" %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_session_path, method: :get, class: "sign-in" %>
+        </li>
+      </ul>
+    <% end %>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, id: "notice", class: "#{key}") %>
+    <% end %>
+    <%# <p id="notice">= notice</p> %>
     <%= yield %>
   </body>
 </html>

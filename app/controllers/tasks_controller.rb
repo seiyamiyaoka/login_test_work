@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-
+  before_action :set_user, only: %i[ index new create]
   def index
-    @tasks = Task.all
+    @tasks = Task.joins(:user).select('tasks.*').where(user: {id: @user.id})
   end
 
   def new
@@ -11,6 +11,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user = @user
     if @task.save
       redirect_to tasks_path, notice: t('.created')
     else
@@ -45,5 +46,9 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:title, :content)
+    end
+
+    def set_user
+      @user = current_user
     end
 end
