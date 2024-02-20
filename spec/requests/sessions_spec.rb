@@ -5,6 +5,7 @@ RSpec.describe "Sessions", type: :request do
     it 'should get new' do
       get '/sessions/new'
       expect(response).to have_http_status(200)
+      expect(response.body).to include('ログイン')
     end
   end
 

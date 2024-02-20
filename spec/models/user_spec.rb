@@ -5,16 +5,23 @@ RSpec.describe User, type: :model do
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
+
   it { should validate_length_of(:email).is_at_most(255) }
   it { should validate_length_of(:password).is_at_least(6) }
 
   describe 'validations' do
 
     it 'email should be unique' do
-      user = User.create(name: 'test', email: 'test@example.com', password: 'password')
+      # uniqueであるとはどういうことか => 一意であること => 他のレコードと重複していないこと
+      user = User.create(
+        name: 'test',
+        email: 'test@example.com',
+        password: 'password'
+      )
       user2 = User.new(name: 'test', email: user.email, password: 'password')
 
       expect(user2).to_not be_valid
+      expect(user2.errors.messages[:email]).to include('はすでに使用されています')
     end
   end
 

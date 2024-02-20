@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   before_action :set_user, only: %i[ index new create]
+
   def index
-    @tasks = Task.joins(:user).select('tasks.*').where(user: {id: @user.id})
+    @tasks = Task.joins(:user).select('tasks.*').where(users: { id: @user.id })
   end
 
   def new
